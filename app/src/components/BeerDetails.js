@@ -1,7 +1,9 @@
 import React, {useState} from "react";
+import {Link} from 'react-router-dom';
+import {useLocalStorage} from '../hooks/useLocalStorage';
 
 export default function BeerDetails ({ beer }) {
-  const [showBeerNerdStuff, setShowBeerNerdStuff] = useState(false);
+  const [showBeerNerdStuff, setShowBeerNerdStuff] = useLocalStorage("beernerd",false);
   console.log(beer.name);
 
   if (beer!==undefined && beer!==null && showBeerNerdStuff===false) {
@@ -40,14 +42,14 @@ export default function BeerDetails ({ beer }) {
           <h2>Ingredients</h2>
           <h3>Malt</h3>
           {beer.ingredients.malt.map(m=>
-              <p>{m.amount.value} {m.amount.unit} {m.name}</p>
+              <p>{m.amount.value} {m.amount.unit} <Link to={`/malt/${m.name.split(' ').join('_').toLowerCase()}`}>{m.name}</Link></p>
           )}
           <h3>Hops</h3>
           {beer.ingredients.hops.map(h=>
-              <p>{h.amount.value} {h.amount.unit} {h.name} - Add for {h.add} - {h.attribute}</p>
+              <p>{h.amount.value} {h.amount.unit} <Link to={`/hops/${h.name.split(' ').join('_').toLowerCase()}`}>{h.name}</Link> - Add for {h.add} - {h.attribute}</p>
           )}
           <h3>Yeast</h3>
-          <p>{beer.ingredients.yeast}</p>
+          <p><Link to={`/yeast/${beer.ingredients.yeast.split(' ').join('_').toLowerCase()}`}>{beer.ingredients.yeast}</Link></p>
         </div>
         <p className="description">Brewer's Tip: {beer.brewers_tips}</p>
       </div>

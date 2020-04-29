@@ -128,3 +128,23 @@ export const getListByMalt = (malt) => async dispatch => {
       });
     });
 };
+
+export const getListByYeast = (yeast) => async dispatch => {
+  dispatch({ type: FETCHING_LIST_START, payload: 1 });
+  console.log(`Fetching beers by yeast: ${yeast}`);
+  axios
+    .get(`https://api.punkapi.com/v2/beers?yeast=${yeast}&per_page=80`)
+    .then(res => {
+      console.log(res);
+
+      dispatch({ type: FETCHING_LIST_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err);
+
+      dispatch({
+        type: FETCHING_LIST_FAILURE,
+        payload: `${err.statusText} with response code ${err.status}`
+      });
+    });
+};

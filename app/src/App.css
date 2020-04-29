@@ -78,3 +78,11 @@ nav {
 .pagehead {
   color: white;
 }
+
+.searchOptions {
+  margin: 1vh 0;
+}
+
+.ingredients a {
+  color: darkblue;
+}

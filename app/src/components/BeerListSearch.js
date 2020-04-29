@@ -1,22 +1,22 @@
 import React, {useEffect} from 'react';
 import {NavLink, useParams} from 'react-router-dom';
-import { getListByName, getListByHops, getListByMalt } from "../actions";
+import { getListByName, getListByHops, getListByMalt, getListByYeast } from "../actions";
 import { connect } from "react-redux";
 
-function BeerListSearch({ getListByName, getListByHops, getListByMalt, isFetching, error, list}) {
-  let {beerName, hops, malt} = useParams();
+function BeerListSearch({ getListByName, getListByHops, getListByMalt, getListByYeast, isFetching, error, list}) {
+  let {beerName, hops, malt, yeast} = useParams();
 
   useEffect(()=>{
-    console.log(beerName);
-    console.log(hops);
-    if (beerName !== undefined) {
-      getListByName(beerName);
+    if (yeast !== undefined) {
+      getListByYeast(yeast);
     } else if (hops !== undefined) {
       getListByHops(hops);
-    } else {
+    } else if (malt !== undefined) {
       getListByMalt(malt);
+    } else {
+      getListByName(beerName);
     }
-  },[beerName, hops, malt, getListByName, getListByHops, getListByMalt]);
+  },[beerName, hops, malt, yeast, getListByName, getListByHops, getListByMalt, getListByYeast]);
 
   return (
     <div>
@@ -50,5 +50,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getListByName, getListByHops, getListByMalt }
+  { getListByName, getListByHops, getListByMalt, getListByYeast }
 )(BeerListSearch);

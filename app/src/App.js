@@ -22,6 +22,7 @@ export default function App() {
           <Route path="/name/:beerName" component={BeerListSearch} />
           <Route path="/hops/:hops" component={BeerListSearch} />
           <Route path="/malt/:malt" component={BeerListSearch} />
+          <Route path="/yeast/:yeast" component={BeerListSearch} />
           <Route path="/search" component={Search} />
         </Switch>
       </div>
