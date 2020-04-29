@@ -48,8 +48,19 @@ a {
 }
 
 .beercard {
-  width: 20%;
+  width: 24%;
   padding: 2vh 2vw;
+  margin: 2vh 2vw;
+}
+
+.beercard:nth-child(even) {
+  background: white;
+  border-radius:10px;
+  color: darkblue;
+}
+
+.beercard:nth-child(even) h2,h3 {
+  color:darkblue;
 }
 
 .beerlink {
@@ -58,4 +69,12 @@ a {
 
 .pagelink {
   text-decoration: underline;
+}
+
+nav {
+  margin: 2vh 2vw;
+}
+
+.pagehead {
+  color: white;
 }
