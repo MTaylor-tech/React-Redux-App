@@ -3,9 +3,12 @@ import axios from "axios";
 export const FETCHING_BEER_START = "FETCHING_BEER_START";
 export const FETCHING_BEER_SUCCESS = "FETCHING_BEER_SUCCESS";
 export const FETCHING_BEER_FAILURE = "FETCHING_BEER_FAILURE";
+export const FETCHING_LIST_START = "FETCHING_LIST_START";
+export const FETCHING_LIST_SUCCESS = "FETCHING_LIST_SUCCESS";
+export const FETCHING_LIST_FAILURE = "FETCHING_LIST_FAILURE";
 
-export const getRandomBeer = () => dispatch => {
-  dispatch({ type: FETCHING_BEER_START });
+export const getRandomBeer = () => async dispatch => {
+  dispatch({ type: FETCHING_BEER_START, payload: 'random' });
 
   // implement the code calling actions for .then and .catch
   axios
@@ -20,6 +23,47 @@ export const getRandomBeer = () => dispatch => {
 
       dispatch({
         type: FETCHING_BEER_FAILURE,
+        payload: `${err.statusText} with response code ${err.status}`
+      });
+    });
+};
+
+export const getBeerById = (beerId) => async dispatch => {
+  dispatch({ type: FETCHING_BEER_START, payload: beerId });
+  console.log(`Fetching ${beerId}`);
+  // implement the code calling actions for .then and .catch
+  axios
+    .get(`https://api.punkapi.com/v2/beers/${beerId}`)
+    .then(res => {
+      console.log(res);
+
+      dispatch({ type: FETCHING_BEER_SUCCESS, payload: res.data[0] });
+    })
+    .catch(err => {
+      console.log(err);
+
+      dispatch({
+        type: FETCHING_BEER_FAILURE,
+        payload: `${err.statusText} with response code ${err.status}`
+      });
+    });
+};
+
+export const getList = (page) => async dispatch => {
+  dispatch({ type: FETCHING_LIST_START, payload: page });
+  console.log(`Fetching page ${page}`);
+  axios
+    .get(`https://api.punkapi.com/v2/beers?page=${page}`)
+    .then(res => {
+      console.log(res);
+
+      dispatch({ type: FETCHING_LIST_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err);
+
+      dispatch({
+        type: FETCHING_LIST_FAILURE,
         payload: `${err.statusText} with response code ${err.status}`
       });
     });

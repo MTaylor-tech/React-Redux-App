@@ -1,36 +1,36 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import { connect } from "react-redux";
+import { useParams} from "react-router-dom";
 
-import { getRandomBeer } from "../actions";
+import { getBeerById } from "../actions";
+import BeerDetails from './BeerDetails';
 
-const Beer = ({ getRandomBeer, beer, isFetching, error }) => {
-  const [showBeerNerdStuff, setShowBeerNerdStuff] = useState(false);
+const Beer = ({ getBeerById, beer, isFetching, error}) => {
+  let {beerId} = useParams();
+
+  useEffect(()=>{
+    getBeerById(beerId);
+  },[beerId, getBeerById]);
 
   if (error !== "")
     return (
       <div>
         <h2>{error}</h2>
-        <button onClick={getRandomBeer}>Load Random Beer</button>
+        <button onClick={()=>getBeerById(beerId)}>Try again</button>
       </div>
     );
 
   if (isFetching) {
-    return <h2>Fetching a beer now :)</h2>;
-  } else if (beer!==undefined && beer!=null) {
+    return <h2>Fetching your beer now :)</h2>;
+  } else if (beer!==undefined && beer!==null) {
     return (
-      <div>
-        <h2>{beer.name}</h2>
-        <img src={beer.image_url} alt={beer.name} />
-        <p>{beer.tagline}</p>
-        <p>{beer.description}</p>
-        <button onClick={()=>setShowBeerNerdStuff(!showBeerNerdStuff)}>Show Beer Nerd Info</button>
-        <button onClick={getRandomBeer}>Load Random Beer</button>
-      </div>
+      <BeerDetails beer={beer} />
     );
   } else {
     return (
       <div>
-        <button onClick={getRandomBeer}>Load Random Beer</button>
+        <p>Something went wrong</p>
+        <button onClick={()=>getBeerById(beerId)}>Try again</button>
       </div>
     );
   }
@@ -47,5 +47,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getRandomBeer }
+  { getBeerById }
 )(Beer);
