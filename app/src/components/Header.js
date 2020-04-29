@@ -6,7 +6,7 @@ export default function Header() {
     <header>
         <img src="../BrewDog-Logo.jpg" alt="Brew Dog" />
         <nav>
-             <Link to="/">Beer List</Link> | <Link to="/beer/random">Random Beer</Link>
+             <Link to="/">Beer List</Link> | <Link to="/beer/random">Random Beer</Link> | <Link to="/search">Search</Link>
        </nav>
     </header>
   );

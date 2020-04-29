@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Beer from "./components/Beer";
 import BeerList from './components/BeerList';
 import BeerListSearch from './components/BeerListSearch';
+import Search from './components/Search';
 
 export default function App() {
   return (
@@ -20,6 +21,8 @@ export default function App() {
           <Route exact path="/" component={BeerList} />
           <Route path="/name/:beerName" component={BeerListSearch} />
           <Route path="/hops/:hops" component={BeerListSearch} />
+          <Route path="/malt/:malt" component={BeerListSearch} />
+          <Route path="/search" component={Search} />
         </Switch>
       </div>
     </Router>

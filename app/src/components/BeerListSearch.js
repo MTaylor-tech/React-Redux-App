@@ -1,20 +1,22 @@
 import React, {useEffect} from 'react';
 import {NavLink, useParams} from 'react-router-dom';
-import { getListByName, getListByHops } from "../actions";
+import { getListByName, getListByHops, getListByMalt } from "../actions";
 import { connect } from "react-redux";
 
-function BeerListSearch({ getListByName, getListByHops, isFetching, error, list}) {
-  let {beerName, hops} = useParams();
+function BeerListSearch({ getListByName, getListByHops, getListByMalt, isFetching, error, list}) {
+  let {beerName, hops, malt} = useParams();
 
   useEffect(()=>{
     console.log(beerName);
     console.log(hops);
     if (beerName !== undefined) {
       getListByName(beerName);
-    } else {
+    } else if (hops !== undefined) {
       getListByHops(hops);
+    } else {
+      getListByMalt(malt);
     }
-  },[beerName, hops, getListByName, getListByHops]);
+  },[beerName, hops, malt, getListByName, getListByHops, getListByMalt]);
 
   return (
     <div>
@@ -48,5 +50,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getListByName, getListByHops }
+  { getListByName, getListByHops, getListByMalt }
 )(BeerListSearch);
