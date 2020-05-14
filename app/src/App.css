@@ -1,0 +1,88 @@
+.App {
+  text-align: center;
+  padding: 4vh 4vw;
+  background: rgb(2,0,36);
+background: -webkit-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(51,64,212,1) 100%);
+background: -o-linear-gradient(left, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(51,64,212,1) 100%);
+background: linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 50%, rgba(51,64,212,1) 100%);
+  color: white;
+  height: 100%;
+}
+
+.description {
+  text-align: justify;
+  padding: 0 4vw;
+}
+
+.mash {
+  border-radius: 10px;
+  background: white;
+  color: black;
+  margin: 1vh 20vw;
+  padding: 1vh 0;
+}
+
+.ingredients {
+  border-radius: 10px;
+  background: white;
+  color: black;
+  margin: 1vh 20vw;
+  padding: 1vh 0;
+}
+
+img {
+  height: 40vmin;
+  pointer-events: none;
+  border-radius: 10px;
+}
+
+a {
+  color: white;
+  text-decoration-style: dotted;
+}
+
+.beerlist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.beercard {
+  width: 24%;
+  padding: 2vh 2vw;
+  margin: 2vh 2vw;
+}
+
+.beercard:nth-child(even) {
+  background: white;
+  border-radius:10px;
+  color: darkblue;
+}
+
+.beercard:nth-child(even) h2,h3 {
+  color:darkblue;
+}
+
+.beerlink {
+  text-decoration: none;
+}
+
+.pagelink {
+  text-decoration: underline;
+}
+
+nav {
+  margin: 2vh 2vw;
+}
+
+.pagehead {
+  color: white;
+}
+
+.searchOptions {
+  margin: 1vh 0;
+}
+
+.ingredients a {
+  color: darkblue;
+}
